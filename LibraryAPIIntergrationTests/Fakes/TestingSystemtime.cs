@@ -3,23 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LibraryAPIIntergrationTests.Fakes
+namespace LibraryApiIntegrationTests.Fakes
 {
-    public class TestingSystemtime : ISystemTime
+    public class TestingSystemTime : ISystemTime
     {
-        public DateTime(1969,4,20, 23, 59, 00);
-        {
-public DateTime GetCurrent()
-        {
-            throw new NotImplementedException();
-        }
-    }
         public DateTime GetCurrent()
         {
-            throw new NotImplementedException();
+            return new DateTime(1969, 4, 20, 23, 59, 00);
         }
-
     }
-    
-    
 }

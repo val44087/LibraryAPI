@@ -31,7 +31,7 @@ namespace LibraryApi.Controllers
         {
             var response = new GetStatusResponse
             {
-                Message = "Everything is golden!",// + config.GetValue<string>("appName"),
+                Message = "Everything is Golden!",// + config.GetValue<string>("appName"),
                 CheckedBy = "Joe Schmidtly",
                 WhenLastChecked = systemTime.GetCurrent()
             };
@@ -48,7 +48,7 @@ namespace LibraryApi.Controllers
 
         // GET /employees?dept=DEV
         [HttpGet("employees")]
-        public ActionResult GetEmployees([FromQuery]string dept = "All")
+        public ActionResult GetEmployees([FromQuery] string dept = "All")
         {
             return Ok($"Returning employees for department {dept}");
         }
@@ -68,8 +68,8 @@ namespace LibraryApi.Controllers
         }
 
         [HttpPost("employees")]
-        public ActionResult HireEmployee([FromBody] EmployeeCreateRequest employeeToHire, 
-            [FromHeader(Name ="Content-Type")] string ellis)
+        public ActionResult HireEmployee([FromBody] EmployeeCreateRequest employeeToHire,
+            [FromHeader(Name = "Content-Type")] string ellis)
         {
             return Ok($"Hiring {employeeToHire.LastName} as a {employeeToHire.Department} \n {ellis}");
 

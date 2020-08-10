@@ -40,7 +40,7 @@ namespace LibraryApi
             services.AddDbContext<LibraryDataContext>(options =>
 
                 options.UseSqlServer(Configuration.GetConnectionString("LibraryDatabase"))
-            ) ;
+            );
 
             services.AddSwaggerGen(c =>
             {
@@ -59,12 +59,16 @@ namespace LibraryApi
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
 
-            }); 
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            if (env.IsEnvironment("Testing"))
+            {
+                // do some stuff for testing.
+            }
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
