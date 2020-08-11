@@ -4,7 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using AutoMapper;
 using LibraryApi.Domain;
+using LibraryApi.Mappers;
 using LibraryApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,6 +38,20 @@ namespace LibraryApi
                 });
 
             services.AddTransient<ISystemTime, SystemTime>();
+            services.AddScoped<IMapBooks, EfSqlBooksMapper>();
+
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new BookProfile());
+            });
+            services.AddSingleton<IMapper>(mapperConfig.CreateMapper());
+            services.AddSingleton<MapperConfiguration>(mapperConfig);
+            services.AddTransient<ILookupDevelopers, RedisDeveloperLookup>();
+            services.AddDistributedRedisCache(options =>
+            {
+                options.Configuration = Configuration.GetConnectionString("Redis");
+
+            });
 
             services.AddDbContext<LibraryDataContext>(options =>
 

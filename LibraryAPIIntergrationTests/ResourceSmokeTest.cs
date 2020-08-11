@@ -19,7 +19,7 @@ namespace LibraryApiIntegrationTests
         }
 
         [Theory]
-        [InlineData("book")]
+        [InlineData("books")]
         [InlineData("status")]
         public async Task IsAlive(string resource)
         {
