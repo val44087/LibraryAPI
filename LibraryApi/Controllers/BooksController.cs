@@ -1,4 +1,5 @@
 ﻿using LibraryApi.Domain;
+using LibraryApi.Filters;
 using LibraryApi.Mappers;
 using LibraryApi.Models;
 using Microsoft.AspNetCore.Http;
@@ -105,14 +106,7 @@ namespace LibraryApi.Controllers
                     NumberOfPages = b.NumberOfPages
                 }).SingleOrDefaultAsync();
 
-            if (book == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                return Ok(book);
-            }
+            return this.Maybe(book);
         }
 
         [HttpGet("books")]
